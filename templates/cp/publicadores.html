@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <br>
+      <h4 class="card-title">Comissão de Serviço</h4>
+      <div class="card-body"> 
+         
+        {% if anciãos %}
+        <a></a>
+         {% else %}   
+        <a href="/add_comissão" class="btn btn-success">Inserir</a> 
+          {% endif %}  
+           </div> 
+
+      <table class="table table-hover table-bordered table-secondary" >
+        <tbody>
+           <thead class="thead-light">
+            <tr>
+              <th>Coordenador</th>
+              <th>Secretário</th>
+              <th>Superintendente de Serviço</th>
+              <th>Editar</th>
+              <th>Apagar</th>
+          
+          
+            </thead>
+              
+             </tr>
+             {% for a in anciãos %} 
+            <tr>
+              <td>{{ a.coordenador|default_if_none:"&nbsp;" }}</td>
+              <td>{{ a.secretário|default_if_none:"&nbsp;"}}</td>
+              <td>{{ a.serviço|default_if_none:"&nbsp;"}}</td>
+              <td><a href="/editar_comissão/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a></td>
+              <td><a href="/deletar_comissão/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></td>    
+           </tr>
+           {% endfor %} 
+          </tbody>
+        </table>
+        <br>
+        <h4 class="card-title">Publicadores</h4>
+         <div class="row">
+          <div class="col-sm-4">
+            <div class="card">
+              <div id='card_pesquisa' class="card-body">
+                <h5 class="card-title">Inserir Publicador</h4>
+                <form method="post">
+                  {% csrf_token %}
+                      <div>
+                      {{ form1.nome }}
+                     <input type="submit" class="btn btn-success" placeholder="Nome" value="Salvar">
+                      <a href="/deletar_todos" class="btn btn-danger">Apagar Todos</a>
+                 </div>
+                </form> 	
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div id='card_pesquisa' class="card-body">
+                <h5 class="card-title">Pesquisar por Nome</h4>
+                <form method="GET"> 
+                  {% csrf_token %} 
+                       <div> 
+                       <input type="text" name="nome" placeholder="Nome" maxlength="11" style="margin: 4% 0% 2% 0%;">
+                       <button class="btn btn-primary">Pesquisar</button>
+                        <button class="btn btn-warning" name="todos">Visualizar Tudo</button>
+                        </div> 
+                </form>   
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div id='card_pesquisa' class="card-body">
+                <h5 class="card-title">Pesquisar por Anúncio</h4>
+                <form method="GET"> 
+                  {% csrf_token %} 
+                        <div > 
+                          <input  type="text" name="anunciado" placeholder="Sim ou Não" maxlength="11" style="margin: 4% 0% 2% 0%;">
+                          <button class="btn btn-primary">Pesquisar</button>
+                          <button class="btn btn-warning" name="todos">Visualizar Tudo</button>
+                        </div>
+                </form>  
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <br>
+        
+   <table  class="table table-hover table-bordered table-secondary" >
+     <tbody>
+        <thead class="thead-light">
+         <tr>
+           <th>Nome</th>
+           <th>Mês Inícial</th>
+           <th>Ano</th>
+           <th>Mês Final</th>
+           <th>Ano</th>
+           <th>Aprovado?</th>
+           <th>Contínuo?</th>
+           <th>Anunciado?</th>
+           <th>Editar</th>
+           <th>Deletar</th>
+           <th>Download Petição</th>
+         </thead>
+           
+          </tr>
+          {% for a in gerais %} 
+         <tr>
+           <td width="180%">{{ a.nome|default_if_none:"&nbsp;" }}</td>
+           <td>{{ a.mês_Inicial|default_if_none:"&nbsp;" }}</td>
+           <td>{{ a.ano_Inicial|default_if_none:"&nbsp;" }}</td>
+           <td>{{ a.mês_Final|default_if_none:"&nbsp;" }}</td>
+           <td>{{ a.ano_Final|default_if_none:"&nbsp;" }}</td>
+           <td>{{ a.aprovado|default_if_none:"&nbsp;" }}</td>
+           <td >{{ a.tempo_indeterminado|default_if_none:"&nbsp;" }}</td>
+           <td>{{ a.anunciado|default_if_none:"&nbsp;" }}</td>
+           <td><a href="/editar_lista/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a></td>
+           <td><a href="/deletar_publicador/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></td>
+           <td><a href="/petição/{{a.id}}"><i class="material-icons" style=color:green data-md-tooltip="Petição">download</i></a></td>
+           
+        </tr>
+        {% endfor %} 
+       </tbody>
+     </table>
+
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h3>Publicadores</h3>
+     <br>
+
+       <form method="post">
+ 
+           <br>
+           {% csrf_token %}
+           <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form.nome|as_crispy_field }}
+            </div>   
+           <div class="form-group col-md-2">
+               {{ form.mês_Inicial|as_crispy_field }}
+           </div>  
+           <div class="form-group col-md-2">
+            {{ form.ano_Inicial|as_crispy_field }}
+        </div>  
+        <div class="form-group col-md-2">
+            {{ form.mês_Final|as_crispy_field }}
+        </div>  
+        <div class="form-group col-md-2">
+            {{ form.ano_Final|as_crispy_field }}
+        </div>  
+      
+            </div> 
+            <div class="form-row">
+           <div class="form-group col-md-3">
+               {{ form.tempo_indeterminado|as_crispy_field }}
+           </div> 
+  
+           <div class="form-group col-md-3">
+               {{ form.aprovado|as_crispy_field }}
+           </div>   
+        
+           <div class="form-group col-md-3">
+               {{ form.anunciado|as_crispy_field }}
+           </div>  
+           <div class="form-group col-md-3">
+            {{ form.data|as_crispy_field }}
+        </div>   
+        </div>  
+            </div >  
+           <input type="submit" class="btn btn-success" value="Salvar">
+           <a href="/publicadores" class="btn btn-primary" role="button" aria-pressed="true">Voltar</a>
+    </form>
+    </div>
+   
+{% endblock %}

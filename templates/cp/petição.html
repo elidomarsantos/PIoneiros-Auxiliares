@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="row">
+    <div class="col-sm-12"> 
+      <div class="card">
+             <div class="card-body"> 
+       
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            {% if gerais1 %}
+            <a href="{% static '{{ gerais1.nome }}.pdf' %}"class="btn btn-success" download="Petição">Download da Petição</a>
+            {% endif %} 
+            <a href="/publicadores" class="btn btn-danger" role="button" aria-pressed="true">Voltar</a>
+           
+        </form>      
+           
+        
+    </div>
+</div>
+</div>
+</div>
+
+
+</html>
+
+{% endblock %}
