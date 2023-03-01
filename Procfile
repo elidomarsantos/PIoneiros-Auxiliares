@@ -1,1 +1,1 @@
-web: gunicorn gerenciamento.wsgi
+web: gunicorn pioneiros_auxiliares.wsgi
