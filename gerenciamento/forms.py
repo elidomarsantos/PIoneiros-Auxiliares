@@ -14,7 +14,7 @@ class Form_Gerais(forms.ModelForm):
         fields = '__all__'
         
         widgets = {
-        'data': forms.DateInput(format=('%Y-%m'), attrs={'class':'form-control', 'placeholder':'Select Date','type': 'date'}),
+        'data': forms.DateInput(format=('%Y-%m-%d'), attrs={'class':'form-control', 'placeholder':'Select Date','type': 'date'}),
         'nome':forms.TextInput(attrs={'placeholder': 'Nome'})
     } 
         

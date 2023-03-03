@@ -161,24 +161,30 @@ def petição(request, id):
     if mês_Inicial is None:
         mês_Inicial = ''
     if mês_Final is None:
-        mês_Final = ''    
+        mês_Final = '' 
+   
     if ano_Inicial is None:
        ano_Inicial = ''
+    
     if ano_Final is None:
         ano_Final = ''    
     
     if tempo_indeterminado == 'Sim':
         tempo_indeterminado = "X"
-        a = ''
-        de = ''
-        mês_Inicial = "Contínuo"
+     
         
-        
+  
     else:    
         tempo_indeterminado = '' 
-        a = 'a'
-        de = 'de'
-  
+        
+        
+    if mês_Final and ano_Final:
+        a = '/' 
+        
+    else: 
+        a = ''       
+        
+     
             
     data1 = formgerais['data'].value()
     data = data1.strftime("%d-%m-%Y")
@@ -200,7 +206,6 @@ def petição(request, id):
                 'secretário': secretário,
                 'serviço': serviço,
                 'a': a,
-                'de': de,
                 'nome_mais': nome_mais
                 
             }
@@ -220,11 +225,19 @@ def petição(request, id):
     
     caminho_arquivo = novo_nome
     
-    if tempo_indeterminado == 'Sim':
-        novo_nome1 = nome + extensão 
-    else:
+    
+    if mês_Inicial:
         novo_nome1 = nome + ' ' + '(' + mês_Inicial + ' ' + str(ano_Inicial) + ')' + extensão 
+    
+    else:
+        novo_nome1 = nome + ' ' +  '(' + 'contínuo' + ')' + extensão
             
+    
+    if mês_Inicial and mês_Final:
+        novo_nome1 = nome + ' ' + '(' + mês_Inicial + ' ' + str(ano_Inicial) + '-' + mês_Final + ' ' + str(ano_Final) + ')' + extensão     
+     
+
+             
 
     try:
         response = FileResponse(open(caminho_arquivo, 'rb'))
